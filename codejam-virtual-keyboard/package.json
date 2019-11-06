@@ -1,0 +1,23 @@
+{
+  "name": "codejam-virtual-keyboard",
+  "description": "Initial project template for RSS codejam-virtual-keyboard task",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nasta313/codejam-virtual-keyboard.git"
+  },
+  "author": "Anastasia Vlasovec <vlasovec.nasta313@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "dependencies": {
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0"
+  }
+}

@@ -1,0 +1,107 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    font-family: "Tahoma, sans-serif"
+}
+
+.textarea{
+    display: block;
+    width: 800px;
+    height: 300px;
+    margin: 0 auto 10px;
+    padding: 10px;
+    font-size: 18px;
+    color: #444
+}
+
+.keyboard{
+    width: 704px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-self: center;
+    &__key{
+        min-width: 40px;
+        height: 40px;
+        margin-left: 6px;
+        margin-bottom: 8px;
+        font-weight: 500;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background: #3a424e;
+        border-radius: 3px;
+        cursor: pointer;
+        user-select: none;
+        transition: border-radius .3s, background .2s;
+        &:hover{
+            background: #251c1c; 
+        }
+    }
+
+    &__AltLeft,
+    &__AltRight,
+    &__ArrowLeft,
+    &__ArrowRight,
+    &__ArrowDown,
+    &__ArrowUp,
+    &__Backspace,
+    &__CapsLock,
+    &__ControlLeft,
+    &__ControlRight,
+    &__Delete,
+    &__Enter,
+    &__ShiftLeft,
+    &__ShiftRight,
+    &__Tab,
+    &__Win ,
+    &__MetaLeft {
+        display: block;
+        font-weight: 600;
+        color: grey;
+    }
+
+    &__Space{
+        display: block;
+        width: 330px;
+        opacity: 0;
+    }
+
+    &__Tab {
+        width: 50px;
+    }
+    
+    &__Delete {
+        width: 44px
+    }
+    
+    &__Backspace, &__CapsLock, &__ShiftLeft {
+        width: 100px;
+    }
+
+    &__Enter,
+    &__ShiftRight {
+        width: 86px;
+    }
+
+}
+
+
+.off,
+.up {
+    display: none;
+}
+
+.down {
+    display: inherit;
+}
+
+.active {
+    border-radius: 50px;
+    background: #251c1c; 
+}
+.hightlight{
+ color: yellow;
+}
