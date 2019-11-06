@@ -1,0 +1,106 @@
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0 auto;
+  font-family: "Tahoma, sans-serif";
+}
+
+.textarea {
+  display: block;
+  width: 800px;
+  height: 300px;
+  margin: 0 auto 10px;
+  padding: 10px;
+  font-size: 18px;
+  color: #444;
+}
+
+.keyboard {
+  width: 704px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.keyboard__key {
+  min-width: 40px;
+  height: 40px;
+  margin-left: 6px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  background: #3a424e;
+  border-radius: 3px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: border-radius .3s, background .2s;
+  transition: border-radius .3s, background .2s;
+}
+
+.keyboard__key:hover {
+  background: #251c1c;
+}
+
+.keyboard__AltLeft, .keyboard__AltRight, .keyboard__ArrowLeft, .keyboard__ArrowRight, .keyboard__ArrowDown, .keyboard__ArrowUp, .keyboard__Backspace, .keyboard__CapsLock, .keyboard__ControlLeft, .keyboard__ControlRight, .keyboard__Delete, .keyboard__Enter, .keyboard__ShiftLeft, .keyboard__ShiftRight, .keyboard__Tab, .keyboard__Win, .keyboard__MetaLeft {
+  display: block;
+  font-weight: 600;
+  color: grey;
+}
+
+.keyboard__Space {
+  display: block;
+  width: 330px;
+}
+
+.keyboard__Tab {
+  width: 50px;
+}
+
+.keyboard__Delete {
+  width: 44px;
+}
+
+.keyboard__Backspace, .keyboard__CapsLock, .keyboard__ShiftLeft {
+  width: 100px;
+}
+
+.keyboard__Enter, .keyboard__ShiftRight {
+  width: 86px;
+}
+
+.off,
+.up {
+  display: none;
+}
+
+.down {
+  display: inherit;
+}
+
+.active {
+  border-radius: 50px;
+  background: #251c1c;
+}
+
+.hightlight {
+  color: yellow;
+}
+/*# sourceMappingURL=style.css.map */
