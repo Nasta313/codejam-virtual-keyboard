@@ -65,10 +65,16 @@ const keys = [
   ['ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'],
 ];
 
-
 function createWrapper() {
   const wrapper = document.createElement('div');
   wrapper.className = 'wrapper';
+  return wrapper;
+}
+
+function createDescription() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'wrapper';
+  wrapper.innerHTML="<p>Change lang -  Alt+ Shift</p>"
   return wrapper;
 }
 
@@ -86,7 +92,7 @@ function generateKeyboard() {
   const keyboard = document.createElement('div');
   keyboard.className = 'keyboard';
 
-  function createButtons(el) {
+  keys.map((el) => {
     const key = document.createElement('div');
     key.classList.add('keyboard__key');
     key.innerHTML = `<span class="keyboard__${el[0]} on">
@@ -98,18 +104,16 @@ function generateKeyboard() {
                           <span class="up">${el[4]}</span>
                         </span>`;
     keyboard.append(key);
-  }
+  });
 
-  keys.map(createButtons);
-
-
-  keyboard.addEventListener('mousedown', (event) => {
-    if (event.target.closest('div').className === 'keyboard__key') {
-      event.target.closest('div').classList.add('active');
+  keyboard.addEventListener('mousedown', ({ target }) => {
+    if (target.closest('div').className === 'keyboard__key') {
+      target.closest('div').classList.add('active');
     }
   });
-  keyboard.addEventListener('mouseup', (event) => {
-    event.target.closest('div').classList.remove('active');
+
+  keyboard.addEventListener('mouseup', ({ target }) => {
+    target.closest('div').classList.remove('active');
   });
 
   return keyboard;
@@ -133,53 +137,59 @@ function changeSymbol() {
 function start() {
   const wrapper = createWrapper();
   document.body.appendChild(wrapper);
+
+  const description = createDescription();
+  wrapper.appendChild(description);
+
   const textarea = createTextarea();
   wrapper.appendChild(textarea);
+
   const keyboard = generateKeyboard();
   wrapper.appendChild(keyboard);
   setCapsLockActive();
 
-  document.querySelector('.keyboard').addEventListener('click', (event) => {
-    const form1 = document.querySelector('.textarea');
-    form1.focus();
-    if (event.target.closest('div').className !== 'keyboard__key') {
-      form1.value += '';
-    } else if (event.target.innerText === 'Enter') {
-      form1.value += '\n';
-    } else if (event.target.innerText === 'Tab') {
-      form1.value += '\t';
-    } else if (event.target.innerText === 'Space') {
-      form1.value += ' ';
-    } else if (event.target.textContent === 'Shift'
-            || event.target.textContent === 'Ctrl'
-            || event.target.textContent === 'Alt'
-            || event.target.textContent === '←'
-            || event.target.textContent === '↓'
-            || event.target.textContent === '↑'
-            || event.target.textContent === '→'
-            || event.target.textContent === 'Win'
+  document.querySelector('.keyboard').addEventListener('click', ({ target }) => {
+    const textarea = document.querySelector('.textarea');
+
+    textarea.focus();
+
+    if (target.closest('div').className !== 'keyboard__key') {
+      textarea.value += '';
+    } else if (target.innerText === 'Enter') {
+      textarea.value += '\n';
+    } else if (target.innerText === 'Tab') {
+      textarea.value += '\t';
+    } else if (target.innerText === 'Space') {
+      textarea.value += ' ';
+    } else if (target.textContent === 'Shift'
+            || target.textContent === 'Ctrl'
+            || target.textContent === 'Alt'
+            || target.textContent === '←'
+            || target.textContent === '↓'
+            || target.textContent === '↑'
+            || target.textContent === '→'
+            || target.textContent === 'Win'
     ) {
-      form1.value += '';
-    } else if (event.target.innerText === 'CapsLock') {
+      textarea.value += '';
+    } else if (target.innerText === 'CapsLock') {
       document.querySelector('.keyboard__CapsLock').classList.toggle('hightlight');
       changeSymbol();
-    } else if (event.target.innerText === 'Del') {
-      form1.value = form1.value.slice(0, -1);
-    } else if (event.target.innerText === 'Backspace') {
-      form1.value = form1.value.slice(0, -1);
+    } else if (target.innerText === 'Del') {
+      textarea.value = textarea.value.slice(0, -1);
+    } else if (target.innerText === 'Backspace') {
+      textarea.value = textarea.value.slice(0, -1);
     } else {
-      form1.value += `${event.target.innerText}`;
+      textarea.value += `${target.innerText}`;
     }
   });
 }
 
-window.onload = function loadWindow() {
-  start();
-};
+window.onload = start();
 
 window.addEventListener('keydown', (event) => {
-  const form1 = document.querySelector('.textarea');
-  form1.focus();
+  const textarea = document.querySelector('.textarea');
+
+  textarea.focus();
   event.preventDefault();
 
   if (event.altKey) {
@@ -201,28 +211,39 @@ window.addEventListener('keydown', (event) => {
   } else if (event.key === 'CapsLock') {
     document.querySelector('.keyboard__CapsLock').classList.toggle('hightlight');
     changeSymbol();
-  } else if (event.key === 'Control'
-          || event.key === 'Meta'
-          || event.key === 'Alt'
-          || event.key === 'ArrowDown'
-          || event.key === 'ArrowLeft'
-          || event.key === 'ArrowRight'
-          || event.key === 'ArrowUp'
-  ) {
-    form1.value += '';
+  } else if (event.key === 'Backspace') {
+    textarea.value = textarea.value.slice(0, -1);
+  } else if (event.key === 'Enter') {
+    textarea.value += '\n';
+  } else if (event.key === 'Delete') {
+    textarea.value = textarea.value.slice(0, -1);
   } else if (event.key === 'Tab') {
-    form1.value += '\t';
+    textarea.value += '\t';
+  } else if (event.key.length === 1) {
+    textarea.value += `${event.key}`;
   } else {
-    form1.value += `${event.key}`;
+    textarea.value += '';
+  } 
+
+  const keyboard = document.querySelector(`.keyboard__${event.code}`);
+
+  if (keyboard){
+    keyboard.closest('DIV').classList.add('active');
   }
-  document.querySelector(`.keyboard__${event.code}`).closest('DIV').classList.add('active');
+
 });
 
 window.addEventListener('keyup', (event) => {
-  document.querySelector(`.keyboard__${event.code}`).closest('DIV').classList.remove('active');
+
+  const keyboard = document.querySelector(`.keyboard__${event.code}`);
+
+  if (keyboard){
+    keyboard.closest('DIV').classList.remove('active');
+  }
 
   if (event.key === 'Shift') {
     event.preventDefault();
     changeSymbol();
   }
+
 });
